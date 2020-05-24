@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>스파르타코딩클럽 | 1주차 숙제</title>
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      h2 {
+        text-align: left;
+      }
+      p {
+        text-align: left;
+      }
+      ul {
+        text-align: left;
+        color: blue;
+      }
+    </style>
+
+    <script>
+      function msgbox() {
+        if ($("#quantity").val() == 0) {
+          alert("수량을 선택해주세요.");
+        } else if ($("#username").val() == 0) {
+          alert("성함을 입력해주세요.");
+        } else if ($("#address").val() == 0) {
+          alert("주소를 입력해주세요.");
+        } else if ($("#phone").val() == 0) {
+          alert("전화번호를 입력해주세요.");
+        } else {
+          alert("주문이 완료되었습니다.");
+        }
+      }
+    </script>
+
+    <script>
+      $(document).ready(function () {
+        console.log("로딩 됨");
+        function rate() {
+          $.ajax({
+            type: "GET",
+            url: "https://api.manana.kr/exchange/rate.json",
+            data: {},
+            success: function (response) {
+              $("#rateView").empty();
+              var rateIn = response[1].rate;
+              console.log("환율 가져옴");
+
+              var temp_html = "<li>" + "달러-원 환율: " + rateIn + "</li>";
+              $("#rateView").append(temp_html);
+            },
+          });
+        }
+        rate();
+      });
+    </script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="py-5 text-center">
+        <img
+          class="d-block mx-auto mb-4"
+          src="https://post-phinf.pstatic.net/MjAxNzExMTRfMTA0/MDAxNTEwNjQzNDA0OTY5.350U2eDMBYCxe7qAGcyq2V9ok9E4EM65l1u3Z6iH1Lkg.DKkBAcmfih5GNxbexEt8UmegIwJX1v0AaRiqUQPdNhcg.JPEG/image_1298557701510643387949.jpg?type=w1200"
+          alt=""
+          width="647"
+          height="300"
+        />
+        <div style="padding-left: 200px; padding-right: 200px;">
+          <h2 style="float: left; display: inline-block;">아이폰SE1 128GB</h2>
+          <h2 style="float: right; font-size: 20px; display: inline-block;">
+            370,000원 /개
+          </h2>
+          <br /><br />
+          <p class="lead">
+            아이폰SE1 128GB 물량을 긴급 공수하였습니다. 재고가 많지 않으니
+            서두르세요.
+          </p>
+          <br /><br />
+
+          <div class="question-box">
+            <ul id="rateView">
+              <li>달러-원 환율:</li>
+            </ul>
+          </div>
+
+          <br /><br />
+        </div>
+        <div style="padding-left: 200px;">
+          <h2>주문하기</h2>
+          <br />
+          <div class="col-md-8 order-md-1">
+            <div class="mb-3">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">수량</span>
+                </div>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="quantity"
+                  placeholder="인당 최대 4개(색상 랜덤)"
+                  required
+                  min="1"
+                  max="4"
+                />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">주문자 이름</span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  placeholder="예)홍길동"
+                  required=""
+                />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">주소</span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="address"
+                  placeholder="도로명 주소"
+                  required=""
+                />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">전화번호</span>
+                </div>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="phone"
+                  placeholder="010-XXXX-XXXX"
+                  required=""
+                />
+              </div>
+            </div>
+
+            <button onclick="msgbox()" type="button" class="btn btn-primary">
+              주문하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
